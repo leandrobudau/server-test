@@ -1,26 +1,14 @@
 pipeline {
   agent any
   
-  tools {
-    nodejs 'node:12'
+  agent {
+      docker { image 'node:14-alpine' }
   }
   
   stages {
-    stage('Checkout') {
+    stage('Version') {
       steps {
-        checkout scm
-      }
-    }
-    
-     stage('Install') {
-      steps {
-        sh 'npm install'
-      }
-    }
-    
-     stage('Build') {
-      steps {
-       sh 'npm run build'
+        sh 'node --version'
       }
     }
   }
